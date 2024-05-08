@@ -14,6 +14,8 @@ import '../libs/maplibre-rtl'
 //@ts-ignore
 import MaplibreGeocoder from '@maplibre/maplibre-gl-geocoder';
 import '@maplibre/maplibre-gl-geocoder/dist/maplibre-gl-geocoder.css';
+import {Protocol} from "pmtiles";
+import maplibregl from 'maplibre-gl'
 
 function renderPopup(popup: JSX.Element, mountNode: ReactDOM.Container): HTMLElement {
   ReactDOM.render(popup, mountNode);
@@ -138,6 +140,9 @@ export default class MapMaplibreGl extends React.Component<MapMaplibreGlProps, M
       // https://maplibre.org/maplibre-gl-js/docs/examples/local-ideographs/
       localIdeographFontFamily: false
     } satisfies MapOptions;
+
+    const protocol = new Protocol()
+    maplibregl.addProtocol('pmtiles', protocol.tile)
 
     const map = new MapLibreGl.Map(mapOpts);
 
