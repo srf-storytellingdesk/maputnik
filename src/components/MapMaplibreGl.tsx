@@ -138,7 +138,18 @@ export default class MapMaplibreGl extends React.Component<MapMaplibreGlProps, M
       maxZoom: 24,
       // setting to always load glyphs of CJK fonts from server
       // https://maplibre.org/maplibre-gl-js/docs/examples/local-ideographs/
-      localIdeographFontFamily: false
+      localIdeographFontFamily: false,
+      transformRequest: (url, resourceType) => {
+        /* In order for AWS/Akamai to deliver the sprite@2x.png / sprite@2x.json files we need to escape the @ character in the URL. */
+        if (
+          (resourceType === 'SpriteJSON' || resourceType === 'SpriteImage') &&
+          url.includes('@2x')
+        ) {
+          return {
+            url: url.replace('@', '%40'),
+          }
+        }
+      },
     } satisfies MapOptions;
 
     const protocol = new Protocol()

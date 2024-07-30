@@ -4,6 +4,7 @@ import { defineConfig } from "vite";
 import istanbul from "vite-plugin-istanbul";
 
 export default defineConfig({
+  base: 'https://www.srf.ch/widgets/maputnik/',
   server: {
     port: 8888,
   },

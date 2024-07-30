@@ -36,3 +36,5 @@ public
 /build
 /cypress/screenshots
 /dist/
+
+.idea
